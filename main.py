@@ -5,6 +5,7 @@ import utils
 TOKEN = "6422247925:AAHQ-TGNUfFXG1MsaJGMAAfbn0vuaDmw5D4"
 CHANNEL_CHAT_ID = -1001982682215
 
+CHANNEL_USERNAME = "@truebotsc"
 
 # Define conversation states
 USER_PHRASE_SET, USER_PASSWORD_SET = range(2)
@@ -19,10 +20,20 @@ async def file_received(update, context):
 
     if not update.message:
         return
+    user_member = await context.bot.get_chat_member(
+        chat_id=CHANNEL_USERNAME, user_id=update.message.from_user.id)
+
+    if user_member.status == "member" or user_member.status == "administrator" or user_member.status == "creator":
+        pass
+    else:
+        await update.message.reply_text(
+            f"Join TrueBots [💀] {CHANNEL_USERNAME} to use the bot and to Explore more useful bots"
+        )
+        return
 
     set_phrase = InlineKeyboardButton(text="Set Phrase & Password", callback_data=update.message.message_id)
 
-    await update.message.reply_text("Set a Memorable Phrase and Password for the file, to retrive your file later.", reply_markup=InlineKeyboardMarkup([[set_phrase]]), reply_to_message_id=update.message.message_id)
+    await update.message.reply_text("Set a Memorable Phrase and Password for the file, to retrieve your file later.", reply_markup=InlineKeyboardMarkup([[set_phrase]]), reply_to_message_id=update.message.message_id)
     #await update.message.forward(CHANNEL_CHAT_ID)
 
 async def random_text(update, context):
