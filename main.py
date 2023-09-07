@@ -89,8 +89,9 @@ async def get_password(update, context):
 
 # Log errors
 async def error(update, context):
-    await update.message.reply_text(str(context.error))
-    print(context.error)
+    if update:
+        await update.message.reply_text(str(context.error))
+        print(context.error)
 
 
 # Run the program
