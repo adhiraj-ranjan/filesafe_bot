@@ -3,10 +3,11 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton, KeyboardButton,
 import utils
 from warnings import filterwarnings
 from telegram.warnings import PTBUserWarning
+import os
 
 filterwarnings(action="ignore", message=r".*CallbackQueryHandler", category=PTBUserWarning)
 
-TOKEN = "6422247925:AAHQ-TGNUfFXG1MsaJGMAAfbn0vuaDmw5D4"
+TOKEN = os.getenv('TOKEN')
 CHANNEL_CHAT_ID = -1001982682215
 
 CHANNEL_USERNAME = "@truebotsc"
